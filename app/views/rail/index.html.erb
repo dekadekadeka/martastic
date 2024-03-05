@@ -1,0 +1,18 @@
+<%=@destinations %>
+<br>
+<%=@lines %>
+<br>
+<%=@arriving_at_stations %>
+<br>
+<%=@waiting_seconds %>
+<br>
+<% @rail_data.each do |data| %>
+  <div class="data-container">
+    <p>Train bound for</p>
+    <%= data["DESTINATION"] %>
+    <%= "#{data["LINE"].capitalize} Line #{data["DIRECTION"]}" %>
+    <%= "Arriving at #{data["STATION"].titleize}" %>
+    <%= "#{data["WAITING_TIME"] == "Arriving" ? "now" : "in #{data["WAITING_TIME"]} at #{data["NEXT_ARR"]}"}" %>
+  <div> 
+<% end %>
+
