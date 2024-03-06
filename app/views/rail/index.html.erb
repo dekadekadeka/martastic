@@ -1,18 +1,27 @@
-<%=@destinations %>
-<br>
-<%=@lines %>
-<br>
-<%=@arriving_at_stations %>
-<br>
-<%=@waiting_seconds %>
-<br>
-<% @rail_data.each do |data| %>
-  <div class="data-container">
-    <p>Train bound for</p>
-    <%= data["DESTINATION"] %>
-    <%= "#{data["LINE"].capitalize} Line #{data["DIRECTION"]}" %>
-    <%= "Arriving at #{data["STATION"].titleize}" %>
-    <%= "#{data["WAITING_TIME"] == "Arriving" ? "now" : "in #{data["WAITING_TIME"]} at #{data["NEXT_ARR"]}"}" %>
-  <div> 
-<% end %>
-
+<div data-controller="rail">
+  <div class="dropdown-container">
+    <div class="dropdown-container-item">
+      <%=@destinations %>
+    </div>
+    <div class="dropdown-container-item">
+      <%=@lines %>
+    </div>
+    <div class="dropdown-container-item">
+      <%=@arriving_at_stations %>
+    </div>
+    <div class="dropdown-container-item">
+      <%=@waiting_seconds %>
+    </div>
+  </div>
+  <div class="schedule-container">
+    <% @rail_data.each do |data| %>
+      <div class="schedule-card <%= data["LINE"].downcase %>">
+        <span>Train bound for</span>
+        <%= data["DESTINATION"] %>
+        <%= "#{data["LINE"].capitalize} Line #{data["DIRECTION"]}" %>
+        <%= "Arriving at #{data["STATION"].titleize}" %>
+        <%= "#{data["WAITING_TIME"] == "Arriving" ? "now" : "in #{data["WAITING_TIME"]} at #{data["NEXT_ARR"]}"}" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,1 +1,61 @@
 /* Application styles */
+body {
+  background-color: #1a1919;
+  color: #f9f9f2;
+  margin: 32px;
+}
+
+.dropdown-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.dropdown-container-item {
+  flex-grow: 0;
+  max-width: 100%;
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 960px) {
+  .dropdown-container-item {
+    flex-grow: 0;
+    max-width: 25%;
+    flex-basis: 25%;
+  }
+}
+
+.schedule-card {
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.blue {
+  background-color: #0b75b3;
+  background-image: linear-gradient(to bottom right, #40b1f3, #0b75b3);
+}
+
+.gold {
+  background-color: #d7aa31;
+  background-image: linear-gradient(to bottom right, #ddb852, #d7aa31);
+  color: #1a1919;
+}
+
+.green {
+  background-color: #07a550;
+  background-image: linear-gradient(to bottom right, #3ef794, #07a550);
+}
+
+.red {
+  background-color: #cc2329;
+  background-image: linear-gradient(to bottom right, #e04a4f, #cc2329);
+}
+
+.schedule-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-row-gap: 32px;
+  grid-column-gap: 32px;
+  margin-top: 64px;
+}
