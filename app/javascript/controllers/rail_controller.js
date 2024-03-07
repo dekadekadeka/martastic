@@ -1,8 +1,8 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="rail"
 export default class extends Controller {
-  static targets = [ "station", "line", "destination" ];
+  static targets = [ 'station', 'line', 'destination' ];
 
   connect() {
     console.log('💙💛🧡 MARTASTIC 2.0 by Deka Ambia 🧡💛💙');
@@ -16,31 +16,35 @@ export default class extends Controller {
   selectStation() {
     const element = this.stationTarget;
     const station = element.value;
-    this.filter(station);
+    this.filter({ queryType: 'station', data: station });
   };
   
   selectDestination() {
     const element = this.destinationTarget;
     const destination = element.value;
-    this.filter(destination);
+    this.filter({ queryType: 'destination', data: destination });
   };
 
   selectLine() {
     const element = this.lineTarget;
     const line = element.value;
-    this.filter(line);
+    this.filter({ queryType: 'line', data: line });
   };
 
-  filter(item) {
-    const value = item;
+  filter(query) {
+    // /filter?station=<>&destination=<>&line=<>
+    const queryParams = [];
 
-    fetch(`/filter?station=${value}`, {
+    queryParams.push(`${query.queryType}=${query.data}`);
+    const filterString = queryParams.join('&');
+    console.log('filterstring', filterString)
+    fetch(`/filter?${filterString}`, {
       contentType: 'application/json',
       hearders: 'application/json',
     })
     .then(resp => resp.text())
     .then(resp => {
-      const container = document.getElementById("schedule-container");
+      const container = document.getElementById('schedule-container');
       container.innerHTML = resp;
     });
   };

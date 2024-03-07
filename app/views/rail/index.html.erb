@@ -3,16 +3,16 @@
     <div class="dropdown-container-item">
       <label for="stations">Next train arriving at</label>
       <select name="stations" id="stations" data-rail-target="station" data-action="rail#selectStation">
-        <% @arriving_at_stations.each do |s| %>
-          <option value="<%= s %>"><%= s %></option>
+        <% @arriving_at_stations.each do |station| %>
+          <option value="<%= station %>"><%= station %></option>
         <% end %>
       </select>
     </div>
     <div class="dropdown-container-item">
     <label for="destinations">headed towards</label>
       <select name="destinations" id="destinations" data-rail-target="destination" data-action="rail#selectDestination">
-        <% @destinations.each do |d| %>
-          <option value="<%= d %>"><%= d %></option>
+        <% @destinations.each do |destination| %>
+          <option value="<%= destination %>"><%= destination %></option>
         <% end %>
       </select>
     </div>

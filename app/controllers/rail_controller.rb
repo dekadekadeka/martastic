@@ -14,10 +14,19 @@ class RailController < ApplicationController
   end
 
   def filter
-    @rail_data = rail_data.select {|s| s["STATION"] == params[:station].upcase }
+    # TODO
+    # Add "all" option that resets filters
+    # Add direction
+    scope = rail_data.sort_by { |data| data["WAITING_SECONDS"].to_i }
+
+    scope = scope.select {|data| data["STATION"] == params[:station].upcase } if params[:station].present?
+    scope = scope.select {|data| data["DESTINATION"] == params[:destination] } if params[:destination].present?
+    scope = scope.select {|data| data["LINE"] == params[:line].upcase } if params[:line].present?
+
+    @rail_data = scope
 
     respond_to do |format|
-      format.json { render json: render_to_string(partial: 'schedule_card', collection: @rail_data, formats: [:html])}
+      format.html { render partial: 'schedule_card', collection: @rail_data }
     end
   end
 end
