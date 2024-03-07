@@ -1,13 +1,28 @@
 <div data-controller="rail">
   <div class="dropdown-container">
     <div class="dropdown-container-item">
-      <%=@destinations %>
+      <label for="stations">Next train arriving at</label>
+      <select name="stations" id="stations">
+        <% @arriving_at_stations.each do |s| %>
+          <option value="<%= s %>"><%= s %></option>
+        <% end %>
+      </select>
     </div>
     <div class="dropdown-container-item">
-      <%=@lines %>
+    <label for="destinations">headed towards</label>
+      <select name="destinations" id="destinations">
+        <% @destinations.each do |d| %>
+          <option value="<%= d %>"><%= d %></option>
+        <% end %>
+      </select>
     </div>
     <div class="dropdown-container-item">
-      <%=@arriving_at_stations %>
+    <label for="lines">on the</label>
+      <select name="lines" id="lines">
+        <% @lines.each do |line| %>
+          <option value="<%= line %>"><%= "#{line} line" %></option>
+        <% end %>
+      </select>
     </div>
     <div class="dropdown-container-item">
       <%=@waiting_seconds %>
@@ -16,11 +31,28 @@
   <div class="schedule-container">
     <% @rail_data.each do |data| %>
       <div class="schedule-card <%= data["LINE"].downcase %>">
-        <span>Train bound for</span>
-        <%= data["DESTINATION"] %>
-        <%= "#{data["LINE"].capitalize} Line #{data["DIRECTION"]}" %>
-        <%= "Arriving at #{data["STATION"].titleize}" %>
-        <%= "#{data["WAITING_TIME"] == "Arriving" ? "now" : "in #{data["WAITING_TIME"]} at #{data["NEXT_ARR"]}"}" %>
+        <div class="bound-for-container">
+          <div class="bound-for">
+            <span class="secondary-info">
+              <%= "#{data["LINE"].capitalize} line train bound for" %>
+            </span>
+            <span class="arrow">
+              <%= data["DIRECTION"] %>
+              <%= image_tag("arrow-up.svg", class: "arrow #{data["DIRECTION"]}") %>
+            </span>
+          </div>
+          <span class="station-name"><%= data["DESTINATION"] %></span>
+        </div>
+        <div class="arriving-at">
+          <span class="secondary-info">Arriving at</span>
+          <br>
+          <span class="station-name">
+            <%= data["STATION"].split(" STATION").first.titleize %>
+          </span>
+        </div>
+        <span class="time-info">
+          <%= "#{data["WAITING_TIME"] == "Arriving" ? "now" : "in #{data["WAITING_TIME"]} at #{data["NEXT_ARR"]}"}" %>
+        </span>
       </div>
     <% end %>
   </div>
