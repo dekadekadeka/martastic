@@ -16,28 +16,30 @@ export default class extends Controller {
   selectStation() {
     const element = this.stationTarget;
     const station = element.value;
-    this.filter({ queryType: 'station', data: station });
+    this.filter();
   };
   
   selectDestination() {
     const element = this.destinationTarget;
     const destination = element.value;
-    this.filter({ queryType: 'destination', data: destination });
+    this.filter();
   };
 
   selectLine() {
     const element = this.lineTarget;
     const line = element.value;
-    this.filter({ queryType: 'line', data: line });
+    this.filter();
   };
 
-  filter(query) {
-    // /filter?station=<>&destination=<>&line=<>
+  filter() {
+    // Query string structure: /filter?station=<>&destination=<>&line=<>
     const queryParams = [];
+    [this.stationTarget, this.destinationTarget, this.lineTarget].forEach(element => {
+      queryParams.push(`${element.id}=${element.value}`);
+    });
 
-    queryParams.push(`${query.queryType}=${query.data}`);
     const filterString = queryParams.join('&');
-    console.log('filterstring', filterString)
+
     fetch(`/filter?${filterString}`, {
       contentType: 'application/json',
       hearders: 'application/json',

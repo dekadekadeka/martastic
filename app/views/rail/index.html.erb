@@ -2,7 +2,8 @@
   <div class="dropdown-container">
     <div class="dropdown-container-item">
       <label for="stations">Next train arriving at</label>
-      <select name="stations" id="stations" data-rail-target="station" data-action="rail#selectStation">
+      <select name="station" id="station" data-rail-target="station" data-action="rail#selectStation">
+        <option value="">Any station</option>
         <% @arriving_at_stations.each do |station| %>
           <option value="<%= station %>"><%= station %></option>
         <% end %>
@@ -10,15 +11,17 @@
     </div>
     <div class="dropdown-container-item">
     <label for="destinations">headed towards</label>
-      <select name="destinations" id="destinations" data-rail-target="destination" data-action="rail#selectDestination">
+      <select name="destination" id="destination" data-rail-target="destination" data-action="rail#selectDestination">
+        <option value="">Any terminal station</option>
         <% @destinations.each do |destination| %>
           <option value="<%= destination %>"><%= destination %></option>
         <% end %>
       </select>
     </div>
     <div class="dropdown-container-item">
-    <label for="lines">on the</label>
-      <select name="lines" id="lines" data-rail-target="line" data-action="rail#selectLine">
+    <label for="lines">on</label>
+      <select name="line" id="line" data-rail-target="line" data-action="rail#selectLine">
+        <option value="">Any line</option>
         <% @lines.each do |line| %>
           <option value="<%= line %>"><%= "#{line} line" %></option>
         <% end %>
