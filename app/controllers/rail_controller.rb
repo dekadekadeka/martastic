@@ -4,10 +4,10 @@ class RailController < ApplicationController
   def index
     @rail_data = rail_data.sort_by { |data| data["WAITING_SECONDS"].to_i }
 
-    # different categories to populate filter dropdowns
-    @arriving_at_stations = rail_data.pluck("STATION").map(&:titleize).uniq.sort
-    @destinations = rail_data.pluck("DESTINATION").uniq.sort
-    @lines = rail_data.pluck("LINE").map(&:capitalize).uniq.sort
+    respond_to do |format|
+      format.html
+      format.json { render json: @rail_data }
+    end
   end
 
   def filter

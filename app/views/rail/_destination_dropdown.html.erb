@@ -1,7 +1,8 @@
+<% destinations = @rail_data.pluck("DESTINATION").uniq.sort %>
 <label for="destinations">headed towards</label>
   <select name="destination" id="destination" data-rail-target="destination" data-action="rail#filter">
     <option value="">Any terminal station</option>
-    <% @destinations.each do |destination| %>
+    <% destinations.each do |destination| %>
       <option value="<%= destination %>"><%= destination %></option>
     <% end %>
   </select>

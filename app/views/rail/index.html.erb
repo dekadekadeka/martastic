@@ -1,13 +1,13 @@
 <div data-controller="rail">
   <div class="dropdown-container">
     <div class="dropdown-container-item" id="station-dropdown">
-      <%= render partial: "station_dropdown", object: @arriving_at_stations %>
+      <%= render partial: "station_dropdown" %>
     </div>
     <div class="dropdown-container-item" id="destination-dropdown">
-      <%= render partial: "destination_dropdown", object: @destinations %>
+      <%= render partial: "destination_dropdown" %>
     </div>
     <div class="dropdown-container-item" id="line-dropdown">
-      <%= render partial: "line_dropdown", object: @lines %>
+      <%= render partial: "line_dropdown" %>
     </div>
   </div>
   <div class="schedule-container" id="schedule-container">
