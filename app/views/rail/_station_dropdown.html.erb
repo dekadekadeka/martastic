@@ -1,0 +1,7 @@
+<label for="stations">Next train arriving at</label>
+<select name="station" id="station" data-rail-target="station" data-action="rail#filter">
+  <option value="">Any station</option>
+  <% @arriving_at_stations.each do |station| %>
+    <option value="<%= station %>"><%= station %></option>
+  <% end %>
+</select>

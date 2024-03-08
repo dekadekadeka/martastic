@@ -13,24 +13,6 @@ export default class extends Controller {
     console.log('💙💛🧡 Have a Martastic day!! 🧡💛💙')
   };
 
-  selectStation() {
-    const element = this.stationTarget;
-    const station = element.value;
-    this.filter();
-  };
-  
-  selectDestination() {
-    const element = this.destinationTarget;
-    const destination = element.value;
-    this.filter();
-  };
-
-  selectLine() {
-    const element = this.lineTarget;
-    const line = element.value;
-    this.filter();
-  };
-
   filter() {
     // Query string structure: /filter?station=<>&destination=<>&line=<>
     const queryParams = [];
@@ -50,5 +32,4 @@ export default class extends Controller {
       container.innerHTML = resp;
     });
   };
-
 };

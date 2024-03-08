@@ -8,7 +8,7 @@ body {
   margin: 32px;
 }
 
-/* form */
+/* filter form */
 
 .dropdown-container {
   width: 100%;
@@ -26,8 +26,8 @@ body {
 @media screen and (min-width: 960px) {
   .dropdown-container-item {
     flex-grow: 0;
-    max-width: 25%;
-    flex-basis: 25%;
+    max-width: 33%;
+    flex-basis: 33%;
   }
 }
 
@@ -106,4 +106,8 @@ body {
 
 .station-name {
   font-size: 40px;
+}
+
+.empty {
+  text-align: center;
 }

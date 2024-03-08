@@ -1,41 +1,16 @@
 <div data-controller="rail">
   <div class="dropdown-container">
-    <div class="dropdown-container-item">
-      <label for="stations">Next train arriving at</label>
-      <select name="station" id="station" data-rail-target="station" data-action="rail#selectStation">
-        <option value="">Any station</option>
-        <% @arriving_at_stations.each do |station| %>
-          <option value="<%= station %>"><%= station %></option>
-        <% end %>
-      </select>
+    <div class="dropdown-container-item" id="station-dropdown">
+      <%= render partial: "station_dropdown", object: @arriving_at_stations %>
     </div>
-    <div class="dropdown-container-item">
-    <label for="destinations">headed towards</label>
-      <select name="destination" id="destination" data-rail-target="destination" data-action="rail#selectDestination">
-        <option value="">Any terminal station</option>
-        <% @destinations.each do |destination| %>
-          <option value="<%= destination %>"><%= destination %></option>
-        <% end %>
-      </select>
+    <div class="dropdown-container-item" id="destination-dropdown">
+      <%= render partial: "destination_dropdown", object: @destinations %>
     </div>
-    <div class="dropdown-container-item">
-    <label for="lines">on</label>
-      <select name="line" id="line" data-rail-target="line" data-action="rail#selectLine">
-        <option value="">Any line</option>
-        <% @lines.each do |line| %>
-          <option value="<%= line %>"><%= "#{line} line" %></option>
-        <% end %>
-      </select>
-    </div>
-    <div class="dropdown-container-item">
-      <%=@waiting_seconds %>
+    <div class="dropdown-container-item" id="line-dropdown">
+      <%= render partial: "line_dropdown", object: @lines %>
     </div>
   </div>
   <div class="schedule-container" id="schedule-container">
-    <% if @rail_data.any? %>
-      <%= render partial: "schedule_card", collection: @rail_data %>
-    <% else %>
-      <p>Sorry, no trains available!</p>  
-    <% end %>
+    <%= render partial: "schedule_card", collection: @rail_data %>
   </div>
 </div>

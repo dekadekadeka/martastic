@@ -1,0 +1,7 @@
+<label for="lines">on</label>
+<select name="line" id="line" data-rail-target="line" data-action="rail#filter">
+  <option value="">Any line</option>
+  <% @lines.each do |line| %>
+    <option value="<%= line %>"><%= "#{line} line" %></option>
+  <% end %>
+</select>
