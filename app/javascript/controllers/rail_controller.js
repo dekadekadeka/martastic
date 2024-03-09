@@ -35,31 +35,25 @@ export default class extends Controller {
             <h1>${resp.error}</h1>
           </div>
         `
-      } else {        
-        this.renderDestinations(resp.destinations);
-        this.renderLines(resp.lines);
-        this.renderScheduleCards(resp.rail_data)
+      } else {
+        const destinationValue = this.destinationTarget.value;
+        const lineValue = this.lineTarget.value;
+        this.renderDropdownOptions(resp.destinations, 'destination', destinationValue);
+        this.renderDropdownOptions(resp.lines, 'line', lineValue);
+        this.renderScheduleCards(resp.rail_data);
       }
     })
     .catch(err => console.log(err));
   };
 
-  renderDestinations(destinations) {
-    const destinationSelect = document.getElementById('destination');
-    let optionString = '<option value="">Any destination</option>'
-    destinations.map(destination => {
-      optionString += `<option value="${destination}">${destination}</option>`
+  renderDropdownOptions(options, optionType, value) {
+    const optionSelect = document.getElementById(optionType);
+    let optionString = `<option value="">Any ${optionType}</option>`;
+    options.map(option => {
+      optionString += `<option value="${option}">${option}</option>`
     });
-    destinationSelect.innerHTML = optionString;
-  };
-
-  renderLines(lines) {
-    const lineSelect = document.getElementById('line');
-    let optionString = '<option value="">Any line</option>'
-    lines.map(line => {
-      optionString += `<option value="${line}">${line} line</option>`
-    });
-    lineSelect.innerHTML = optionString;
+    optionSelect.innerHTML = optionString;
+    optionSelect.value = value;
   };
 
   renderScheduleCards(railData) {
