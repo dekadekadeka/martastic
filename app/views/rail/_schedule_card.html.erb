@@ -1,22 +1,22 @@
 <div class="schedule-card <%= schedule_card["LINE"].downcase %>">
-  <div class="bound-for-container">
-    <div class="bound-for">
+  <div class="arriving-at-container">
+    <div class="arriving-at">
       <span class="secondary-info">
-        <%= "#{schedule_card["LINE"].capitalize} line train bound for" %>
+        <%= "Next #{schedule_card["LINE"].capitalize} line train arriving at" %>
       </span>
       <span class="arrow">
         <%= schedule_card["DIRECTION"] %>
         <%= image_tag("arrow-up.svg", class: "arrow #{schedule_card["DIRECTION"]}") %>
       </span>
     </div>
-    <span class="station-name"><%= schedule_card["DESTINATION"] %></span>
-  </div>
-  <div class="arriving-at">
-    <span class="secondary-info">Arriving at</span>
-    <br>
     <span class="station-name">
       <%= schedule_card["STATION"].split(" STATION").first.titleize %>
     </span>
+  </div>
+  <div class="bound-for">
+    <span class="secondary-info">Bound for</span>
+    <br>
+    <span class="station-name"><%= schedule_card["DESTINATION"] %></span>
   </div>
   <span class="time-info">
     <%= "#{schedule_card["WAITING_TIME"] == "Arriving" ? "now" : "in #{schedule_card["WAITING_TIME"]} at #{schedule_card["NEXT_ARR"]}"}" %>
