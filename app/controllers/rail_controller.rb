@@ -5,8 +5,12 @@ class RailController < ApplicationController
     @rail_data = rail_data.sort_by { |data| data["WAITING_SECONDS"].to_i }
 
     respond_to do |format|
-      format.html
-      format.json { render json: @rail_data }
+      if @rail_data.any?
+        format.html
+        format.json { render json: @rail_data }
+      else
+        format.html { render :after_hours }
+      end
     end
   end
 
