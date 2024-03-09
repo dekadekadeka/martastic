@@ -106,6 +106,7 @@ body {
 
 .station-name {
   font-size: 40px;
+  text-transform: capitalize;
 }
 
 .empty {

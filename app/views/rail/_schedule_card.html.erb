@@ -2,7 +2,7 @@
   <div class="arriving-at-container">
     <div class="arriving-at">
       <span class="secondary-info">
-        <%= "Next #{schedule_card["LINE"].capitalize} line train arriving at" %>
+        <%= "Next #{schedule_card["LINE"].downcase} line train arriving at" %>
       </span>
       <span class="arrow">
         <%= schedule_card["DIRECTION"] %>

@@ -10,7 +10,7 @@ export default class extends Controller {
     console.log('https://www.linkedin.com/in/renee-deka-ambia-96731773/');
     console.log('Portfolio at https://www.deka.ooo');
     console.log('This is not an official MARTA website! They\'re over at https://www.itsmarta.com');
-    console.log('💙💛🧡 Have a Martastic day!! 🧡💛💙')
+    console.log('💙💛🧡 Have a Martastic day!! 🧡💛💙');
   };
 
   filter() {
@@ -26,10 +26,73 @@ export default class extends Controller {
       contentType: 'application/json',
       hearders: 'application/json',
     })
-    .then(resp => resp.text())
+    .then(resp => resp.json())
     .then(resp => {
-      const container = document.getElementById('schedule-container');
-      container.innerHTML = resp;
+      if (resp.error) {
+        const scheduleContainer = document.getElementById('schedule-container');
+        scheduleContainer.innerHTML = `
+          <div class="empty">
+            <h1>${resp.error}</h1>
+          </div>
+        `
+      } else {        
+        this.renderDestinations(resp.destinations);
+        this.renderLines(resp.lines);
+        this.renderScheduleCards(resp.rail_data)
+      }
+    })
+    .catch(err => console.log(err));
+  };
+
+  renderDestinations(destinations) {
+    const destinationSelect = document.getElementById('destination');
+    let optionString = '<option value="">Any destination</option>'
+    destinations.map(destination => {
+      optionString += `<option value="${destination}">${destination}</option>`
     });
+    destinationSelect.innerHTML = optionString;
+  };
+
+  renderLines(lines) {
+    const lineSelect = document.getElementById('line');
+    let optionString = '<option value="">Any line</option>'
+    lines.map(line => {
+      optionString += `<option value="${line}">${line} line</option>`
+    });
+    lineSelect.innerHTML = optionString;
+  };
+
+  renderScheduleCards(railData) {
+    const scheduleContainer = document.getElementById('schedule-container');
+    let scheduleCardString = '';
+    railData.map(data => {
+      scheduleCardString += `
+        <div class="schedule-card ${data["LINE"].toLowerCase()}">
+        <div class="arriving-at-container">
+          <div class="arriving-at">
+            <span class="secondary-info">
+              Next ${data["LINE"].toLowerCase()} line train arriving at
+            </span>
+            <span class="arrow">
+              ${data["DIRECTION"]}
+              <img src="/assets/arrow-up.svg" class="arrow ${data["DIRECTION"]}">
+            </span>
+          </div>
+          <span class="station-name">
+            ${data["STATION"].split(" STATION")[0].toLowerCase()}
+          </span>
+        </div>
+        <div class="bound-for">
+          <span class="secondary-info">Bound for</span>
+          <br>
+          <span class="station-name">${data["DESTINATION"]}</span>
+        </div>
+        <span class="time-info">
+        ${data["WAITING_TIME"] === 'Arriving' ? 'now' : `in ${data["WAITING_TIME"]} at ${data["NEXT_ARR"]}`}
+        </span>
+      </div>
+      `
+    });
+    scheduleContainer.innerHTML = scheduleCardString;
   };
 };
