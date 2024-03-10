@@ -50,7 +50,7 @@ export default class extends Controller {
     const optionSelect = document.getElementById(optionType);
     let optionString = `<option value="">Any ${optionType}</option>`;
     options.map(option => {
-      optionString += `<option value="${option}">${option}</option>`
+      optionString += `<option value="${option}">${option} ${optionType === 'line' ? 'line' : ''}</option>`
     });
     optionSelect.innerHTML = optionString;
     optionSelect.value = value;
