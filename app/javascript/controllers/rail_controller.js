@@ -45,7 +45,8 @@ export default class extends Controller {
     })
     .catch(err => console.log(err));
   };
-
+// reset destinations and lines any time station dropdown gets changed
+// reset station dropdown every time page gets reloaded
   renderDropdownOptions(options, optionType, value) {
     const optionSelect = document.getElementById(optionType);
     let optionString = `<option value="">Any ${optionType}</option>`;
@@ -53,7 +54,11 @@ export default class extends Controller {
       optionString += `<option value="${option}">${option} ${optionType === 'line' ? 'line' : ''}</option>`
     });
     optionSelect.innerHTML = optionString;
-    optionSelect.value = value;
+    if (options.length === 1) {
+      optionSelect.value = options[0];
+    } else {
+      optionSelect.value = value;
+    }
   };
 
   renderScheduleCards(railData) {
