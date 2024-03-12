@@ -111,6 +111,7 @@ select {
   align-content: center;
   display: flex;
   font-size: 24px;
+  margin-left: 8px;
 }
 
 .arrow img {
