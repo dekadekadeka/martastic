@@ -1,5 +1,5 @@
 <div data-controller="rail">
-  <div class="dropdown-container">
+  <form class="dropdown-container" id="filter-form">
     <div class="dropdown-container-item" id="station-dropdown">
       <%= render partial: "station_dropdown" %>
     </div>
@@ -9,7 +9,7 @@
     <div class="dropdown-container-item" id="line-dropdown">
       <%= render partial: "line_dropdown" %>
     </div>
-  </div>
+  </form>
   <div class="schedule-container" id="schedule-container">
     <%= render partial: "schedule_card", collection: @rail_data %>
   </div>

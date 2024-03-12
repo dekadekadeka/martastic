@@ -11,11 +11,18 @@ export default class extends Controller {
     console.log('Portfolio at https://www.deka.ooo');
     console.log('This is not an official MARTA website! They\'re over at https://www.itsmarta.com');
     console.log('💙💛🧡 Have a Martastic day!! 🧡💛💙');
+    document.getElementById('filter-form').reset();
   };
 
-  filter() {
-    // Query string structure: /filter?station=<>&destination=<>&line=<>
+  filter(event) {
+    // Query params structure: /filter?station=<>&destination=<>&line=<>
     const queryParams = [];
+
+    if (event.target === this.stationTarget) {
+      this.destinationTarget.value = '';
+      this.lineTarget.value = '';
+    }
+    
     [this.stationTarget, this.destinationTarget, this.lineTarget].forEach(element => {
       queryParams.push(`${element.id}=${element.value}`);
     });
@@ -45,8 +52,7 @@ export default class extends Controller {
     })
     .catch(err => console.log(err));
   };
-// reset destinations and lines any time station dropdown gets changed
-// reset station dropdown every time page gets reloaded
+
   renderDropdownOptions(options, optionType, value) {
     const optionSelect = document.getElementById(optionType);
     let optionString = `<option value="">Any ${optionType}</option>`;
