@@ -12,6 +12,9 @@ export default class extends Controller {
     console.log('This is not an official MARTA website! They\'re over at https://www.itsmarta.com');
     console.log('💙💛🧡 Have a Martastic day!! 🧡💛💙');
     document.getElementById('filter-form').reset();
+    fetch('/filter')
+      .then(resp => resp.json())
+      .then(resp => this.renderScheduleCards(resp.rail_data))
   };
 
   filter(event) {
@@ -29,28 +32,25 @@ export default class extends Controller {
 
     const filterString = queryParams.join('&');
 
-    fetch(`/filter?${filterString}`, {
-      contentType: 'application/json',
-      hearders: 'application/json',
-    })
-    .then(resp => resp.json())
-    .then(resp => {
-      if (resp.error) {
-        const scheduleContainer = document.getElementById('schedule-container');
-        scheduleContainer.innerHTML = `
-          <div class="empty">
-            <h1>${resp.error}</h1>
-          </div>
-        `
-      } else {
-        const destinationValue = this.destinationTarget.value;
-        const lineValue = this.lineTarget.value;
-        this.renderDropdownOptions(resp.destinations, 'destination', destinationValue);
-        this.renderDropdownOptions(resp.lines, 'line', lineValue);
-        this.renderScheduleCards(resp.rail_data);
-      }
-    })
-    .catch(err => console.log(err));
+    fetch(`/filter?${filterString}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        if (resp.error) {
+          const scheduleContainer = document.getElementById('schedule-container');
+          scheduleContainer.innerHTML = `
+            <div class="empty">
+              <h1>${resp.error}</h1>
+            </div>
+          `
+        } else {
+          const destinationValue = this.destinationTarget.value;
+          const lineValue = this.lineTarget.value;
+          this.renderDropdownOptions(resp.destinations, 'destination', destinationValue);
+          this.renderDropdownOptions(resp.lines, 'line', lineValue);
+          this.renderScheduleCards(resp.rail_data);
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   renderDropdownOptions(options, optionType, value) {
