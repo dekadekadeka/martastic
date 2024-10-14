@@ -2,7 +2,7 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-// DO NOT USE RELATIVE PATHS! THEY BREAK AWS
+// DO NOT USE RELATIVE IMPORTS EVEN IF THEY ARE AUTO-GENERATED!!
 
 import { application } from "controllers/application"
 
