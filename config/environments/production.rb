@@ -24,8 +24,6 @@ Rails.application.configure do
   config.public_file_server.enabled = true
 
   config.assets.digest = true
-  config.assets.compile = false  # Temporary to allow Rails to serve missing assets
-  config.action_controller.asset_host = "/assets"
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
