@@ -48,7 +48,7 @@ export default class extends Controller {
         const lineValue = this.lineTarget.value;
         this.renderDropdownOptions(resp.destinations, 'destination', destinationValue);
         this.renderDropdownOptions(resp.lines, 'line', lineValue);
-        this.renderScheduleCards(filterString);
+        this.renderScheduleCards(resp.schedule_cards);
       }
     })
     .catch(err => console.log(err));
@@ -68,25 +68,8 @@ export default class extends Controller {
     }
   };
 
-  renderScheduleCards(filterString) {
+  renderScheduleCards(scheduleCards) {
     const scheduleContainer = document.getElementById('schedule-container');
-    fetch(`/filter?${filterString}`, {
-        headers: {
-          "Accept": "text/html"
-        }
-      })
-      .then(resp => resp.text())
-      .then(resp => {
-        if (resp.error) {
-          scheduleContainer.innerHTML = `
-            <div class="empty">
-              <h1>${resp.error}</h1>
-            </div>
-          `
-        } else {
-          scheduleContainer.innerHTML = resp;
-        }
-      }
-    )
+    scheduleContainer.innerHTML = scheduleCards;
   };
 };
