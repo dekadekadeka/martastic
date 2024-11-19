@@ -2,7 +2,9 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+// DO NOT USE RELATIVE IMPORTS EVEN IF THEY ARE AUTO-GENERATED!!
 
-import RailController from "./rail_controller"
+import { application } from "controllers/application"
+
+import RailController from "controllers/rail_controller"
 application.register("rail", RailController)

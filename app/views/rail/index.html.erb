@@ -11,5 +11,6 @@
     </div>
   </form>
   <div class="schedule-container" id="schedule-container">
+    <%= render partial: "schedule_card", collection: @rail_data, as: :schedule_card %>
   </div>
 </div>

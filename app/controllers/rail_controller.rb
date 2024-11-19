@@ -32,7 +32,12 @@ class RailController < ApplicationController
 
     respond_to do |format|
       if @rail_data.any?
-        format.json { render json: { destinations: @destinations, lines: @lines, rail_data: @rail_data }}
+        format.json do
+          render json: { destinations: @destinations,
+          lines: @lines,
+          schedule_cards: render_to_string(partial: "schedule_card", formats: [:html], collection: @rail_data, locals: { rail_data: @rail_data }),
+        }
+        end
       else
         format.json { render json: { error: "Sorry, no trains matched your filters!" }}
       end
