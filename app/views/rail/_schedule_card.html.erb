@@ -13,12 +13,17 @@
       <%= schedule_card["STATION"].split(" STATION").first.titleize %>
     </span>
   </div>
-  <div class="bound-for">
+  <div>
     <span class="secondary-info">Bound for</span>
     <br>
     <span class="station-name"><%= schedule_card["DESTINATION"] %></span>
   </div>
-  <span class="time-info">
-    <%= "#{schedule_card["WAITING_TIME"] == "Arriving" ? "now" : "in #{schedule_card["WAITING_TIME"]} at #{schedule_card["NEXT_ARR"]}"}" %>
-  </span>
+  <div class="bottom-container">
+    <span class="time-info">
+      <%= "#{schedule_card["WAITING_TIME"] == "Arriving" ? "now" : "in #{schedule_card["WAITING_TIME"]} at #{schedule_card["NEXT_ARR"]}"}" %>
+    </span>
+    <span class="train-id" title="This is the train ID - number that appears on the front of the train!">
+      <%= schedule_card["TRAIN_ID"] %>
+    </span>
+  </div>
 </div>
