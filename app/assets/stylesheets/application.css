@@ -138,3 +138,12 @@ select {
 .empty {
   text-align: center;
 }
+
+.bottom-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.train-id {
+  transform: rotate(270deg);
+}
