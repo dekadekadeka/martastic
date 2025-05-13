@@ -12,13 +12,14 @@ export default class extends Controller {
     console.log('This is not an official MARTA website! They\'re over at https://www.itsmarta.com');
     console.log('💙💛🧡 Have a Martastic day!! 🧡💛💙');
     document.getElementById('filter-form').reset();
+    setInterval(() => this.filter(), 5000);
   };
 
   filter(event) {
     // Query params structure: /filter?station=<>&destination=<>&line=<>
     const queryParams = [];
 
-    if (event.target === this.stationTarget) {
+    if (event?.target === this.stationTarget) {
       this.destinationTarget.value = '';
       this.lineTarget.value = '';
     }
