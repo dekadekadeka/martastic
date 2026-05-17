@@ -10,7 +10,7 @@
       </span>
     </div>
     <span class="station-name">
-      <%= schedule_card["STATION"].split(" STATION").first.titleize %>
+      <%= schedule_card["STATION"] == "OMNI DOME STATION" ? "SEC Center" :  schedule_card["STATION"].split(" STATION").first.titleize %>
     </span>
   </div>
   <div>
