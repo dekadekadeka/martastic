@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.4.1"
+ruby "4.0.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -32,8 +32,8 @@ gem "tzinfo-data", platforms: %i[ mswin jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-gem 'httparty'
-gem 'sprockets-rails'
+gem "httparty"
+gem "sprockets-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -49,7 +49,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'pry', '~> 0.14.2'
+  gem "pry", "~> 0.14.2"
+  gem "ostruct"
 end
 
 group :test do
