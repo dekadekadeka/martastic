@@ -25,8 +25,8 @@ export default class extends Controller {
     }
     
     [this.stationTarget, this.destinationTarget, this.lineTarget].forEach(element => {
-      // API still uses VERY old name for this station!
-      const value = element.value === 'SEC Center Station' ? 'Omni Dome Station' : element.value;
+      // API still uses a VERY old name for this station!
+      const value = element.value === 'SEC District Station' ? 'Omni Dome Station' : element.value;
 
       queryParams.push(`${element.id}=${value}`);
     });
