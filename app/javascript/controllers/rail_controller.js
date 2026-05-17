@@ -25,7 +25,10 @@ export default class extends Controller {
     }
     
     [this.stationTarget, this.destinationTarget, this.lineTarget].forEach(element => {
-      queryParams.push(`${element.id}=${element.value}`);
+      // API still uses a VERY old name for this station!
+      const value = element.value === 'SEC District Station' ? 'Omni Dome Station' : element.value;
+
+      queryParams.push(`${element.id}=${value}`);
     });
 
     const filterString = queryParams.join('&');

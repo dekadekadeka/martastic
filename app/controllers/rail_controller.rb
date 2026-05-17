@@ -3,6 +3,10 @@ class RailController < ApplicationController
 
   def index
     @rail_data = rail_data.sort_by { |data| data["WAITING_SECONDS"].to_i }
+    #  API still uses a VERY old name for this station!
+    @station_data = @rail_data.pluck("STATION").map{ |station| station === "OMNI DOME STATION" ? "SEC District Station" : station.titleize }.uniq.sort
+    @lines = @rail_data.pluck("LINE").map(&:capitalize).uniq.sort
+    @destinations = @rail_data.pluck("DESTINATION").uniq.sort
 
     respond_to do |format|
       if @rail_data.any?
